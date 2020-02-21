@@ -1,0 +1,6 @@
+[submodule "vendor/logrus"]
+	path = vendor/logrus
+	url = https://github.com/sirupsen/logrus
+[submodule "vendor/elastic.v7"]
+	path = vendor/elastic.v7
+	url = https://gopkg.in/olivere/elastic.v7
