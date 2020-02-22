@@ -6,12 +6,12 @@ import (
 	"net/http"
 
 	"github.com/go-zoo/bone"
+	"github.com/gunjan01/searcher/source/config"
 	"github.com/gunjan01/searcher/source/search"
 )
 
 func indexMapping() string {
-	filePath := "github.com/saltside/gunjan01/source/search/books.json"
-	raw, err := ioutil.ReadFile(filePath)
+	raw, err := ioutil.ReadFile(config.Filepath)
 	if err != nil {
 		logrus.WithError(err)
 	}
@@ -22,7 +22,7 @@ func indexMapping() string {
 func init() {
 	client, err := search.NewES()
 	if err != nil {
-		err := client.EnsureIndex("literary_books", indexMapping())
+		err := client.EnsureIndex(config.IndexName, indexMapping())
 		if err != nil {
 			logrus.WithError(err)
 		}
@@ -47,7 +47,7 @@ func router() http.Handler {
 }
 
 func main() {
-	err := http.ListenAndServe(":8080", router())
+	err := http.ListenAndServe(config.Port, router())
 
 	if err != nil {
 		logrus.WithError(err).Fatalf("Failed to start the server")
