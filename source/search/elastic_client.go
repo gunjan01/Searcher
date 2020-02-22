@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/sirupsen/logrus"
 	elastic "gopkg.in/olivere/elastic.v7"
 )
 
@@ -34,13 +35,13 @@ func NewES() (*Es, error) {
 func (c *Es) CreateNewIndex(indexName string, mappings string) error {
 	createIndex, err := c.Client.CreateIndex(indexName).BodyString(mappings).Do(c.ctx)
 	if err != nil {
-		//logrus.WithError(err).WithFields(fields).Error("Unable to create index")
+		logrus.WithError(err).Error("Unable to create index")
 		return err
 	}
 
 	if !createIndex.Acknowledged {
 		err = fmt.Errorf("Index creation - %s not acknowledged", indexName)
-		//logrus.WithError(err).WithFields(fields).Error("Created index not acknowledged")
+		logrus.WithError(err).Error("Created index not acknowledged")
 		return err
 	}
 
@@ -54,7 +55,7 @@ func (c *Es) EnsureIndex(indexName string, mappings string) error {
 		return err
 	}
 	if exists {
-		//logrus.WithFields(fields).Info("Index already exists")
+		logrus.Info("Index already exists")
 		return nil
 	}
 

@@ -4,19 +4,21 @@
     "number_of_replicas": 1
   },
   "mappings": {
-    "properties": {
-      "author": {
-        "type": "text"
-      },
-      "title": {
-        "type": "text"
-       },
-      "location": {
-		"type": "text"
-	  },
-	  "text":{
-		"type": "text"
-	  }
+    "type_name": {
+      "properties": {
+        "author": {
+          "type": "keyword"
+        },
+        "title": {
+          "type": "keyword"
+        },
+        "location": {
+          "type": "integer"
+        },
+        "text":{
+          "type": "text"
+        }
+      }
     }
   }
 }
