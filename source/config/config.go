@@ -9,4 +9,7 @@ var (
 
 	// Port is the server port.
 	Port = ":8080"
+
+	// ElasticURL is the URL on which the elastic cluster is running.
+	ElasticURL = "http://localhost:9200"
 )

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/gunjan01/searcher/source/config"
 	"github.com/sirupsen/logrus"
 	elastic "gopkg.in/olivere/elastic.v7"
 )
@@ -17,7 +18,7 @@ type Es struct {
 // NewES returns an elastic client of type Es.
 func NewES() (*Es, error) {
 	client, err := elastic.NewClient(
-		elastic.SetURL("http://localhost:9200"),
+		elastic.SetURL(config.ElasticURL),
 		elastic.SetSniff(false),
 		elastic.SetHealthcheck(false),
 	)

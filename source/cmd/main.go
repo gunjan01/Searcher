@@ -31,7 +31,10 @@ func init() {
 
 func router() http.Handler {
 	mux := bone.New()
-	handler := Handler{}
+	elasticClient, _ := search.NewES()
+	handler := Handler{
+		client: elasticClient,
+	}
 
 	mux.Get(
 		"/ping",
